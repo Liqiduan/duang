@@ -10,7 +10,8 @@ class PareserHtml(unittest.TestCase):
         title = "The Title"
 
         context = '<a href="%s">The %d Chater %s</a>' % (link, index, title)
-        r = duang.Duang.parseIndex(context)
+        d = duang.Duang()
+        r = d.parseIndex(context)
         
         self.assertEquals(r['link'], link)
         self.assertEquals(r['index'], index)

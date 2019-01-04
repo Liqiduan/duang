@@ -4,10 +4,14 @@ import urllib2
 import re
 
 class Duang():
-    @staticmethod
-    def parseIndex(str):
+    def __init__(self, pre='The', post='Chater'):
+        self.__pre = pre
+        self.__post = post
+
+    def parseIndex(self, str):
         pattern_link = r'<a\s*href="(?P<link>.*)"\s*>'
-        pattern_index = r'\s*The\s*(?P<index>\d+)\s*Chater'
+        pattern_index = r'\s*%s\s*(?P<index>\d+)\s*%s' \
+            % (self.__pre, self.__post)
         pattern_title = r'\s*(?P<title>.*)\s*</a>'
         pattern = pattern_link + pattern_index + pattern_title
 
