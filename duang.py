@@ -9,7 +9,7 @@ class Duang():
         self.__post = post
 
     def parseIndex(self, str):
-        pattern_link = r'<a\s*href="(?P<link>.*)"\s*>'
+        pattern_link = r'<a\s*href\s*="(?P<link>.*)"\s*>'
         pattern_index = r'\s*%s\s*(?P<index>\d+)\s*%s' \
             % (self.__pre, self.__post)
         pattern_title = r'\s*(?P<title>.*)\s*</a>'
