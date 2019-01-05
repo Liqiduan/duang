@@ -9,15 +9,18 @@ class Duang():
         self.__post = post
 
     def parseIndex(self, str):
-        pattern_link = r'<a\s*href\s*="(?P<link>.*)"\s*>'
+        pattern_content = r'[^<>"]'
+        pattern_link = r'<a\s*href\s*="(?P<link>%s*)"\s*>' % pattern_content
         pattern_index = r'\s*%s\s*(?P<index>\d+)\s*%s' \
             % (self.__pre, self.__post)
-        pattern_title = r'\s*(?P<title>.*)\s*</a>'
+        pattern_title = r'\s*(?P<title>%s*)\s*</a>' % pattern_content
         pattern = pattern_link + pattern_index + pattern_title
-
-        item = re.search(pattern, str)
-        r = item.groupdict()
-        r['index'] = int(r['index'])
+        
+        r = []
+        for i in re.finditer(pattern, str):
+            tmp = i.groupdict()
+            tmp['index'] = int(tmp['index'])
+            r.append(tmp)
 
         return r
 
