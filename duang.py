@@ -1,10 +1,11 @@
+#coding=utf8
 import ssl
 import urllib2
 
 import re
 
 class Duang():
-    def __init__(self, pre='The', post='Chater'):
+    def __init__(self, pre=r'第', post=r'章'):
         self.__pre = pre
         self.__post = post
 
