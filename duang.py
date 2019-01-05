@@ -1,13 +1,14 @@
 #coding=utf8
 import ssl
 import urllib2
-
 import re
+import json
 
 class Duang():
     def __init__(self, pre=r'第', post=r'章'):
         self.__pre = pre
         self.__post = post
+        self.__index = []
 
     def parseIndex(self, str):
         pattern_content = r'[^<>"]'
@@ -24,6 +25,21 @@ class Duang():
             r.append(tmp)
 
         return r
+
+    def updateIndex(self, str):
+        self.__index = self.parseIndex(str)
+
+    def saveIndex(self, str):
+        with open(str, 'w') as f:
+            json.dump(self.__index, f)
+
+    def loadIndex(self, str):
+        with open(str, 'r') as f:
+            tmp = f.read()
+        self.__index = json.loads(tmp)
+
+    def getIndex(self):
+        return self.__index
 
 def test():
     link = "test_href"
